@@ -1,0 +1,60 @@
+company_id,company_name,company_type,role,batch_year,min_cgpa,allowed_backlogs,allowed_branches,ctc_lpa,base_lpa,selection_rounds,location
+
+Y24C001,TCS,Service,Software Engineer,2024,6.5,1,"CSE,IT,ECE",6.8,3.5,"Aptitude,Coding,Technical,HR",Multiple
+Y24C002,TCS,Service,System Engineer,2024,6.0,1,"CSE,IT,ECE,EEE",6.2,3.0,"Aptitude,Technical,HR",Multiple
+Y24C003,TCS,Service,Digital Engineer,2024,7.5,0,"CSE,IT",8.8,4.3,"Coding,Technical,HR",Bangalore
+
+Y24C004,Infosys,Service,SE,2024,6.5,1,"CSE,IT,ECE",6.5,3.6,"Aptitude,Coding,HR",Multiple
+Y24C005,Infosys,Service,Digital Specialist Engineer,2024,7.0,0,"CSE,IT,ECE",9.5,4.8,"Coding,Technical,HR",Bangalore
+Y24C006,Infosys,Service,Power Programmer,2024,7.5,0,"CSE,IT",11.5,5.8,"Coding,DSA,Technical",Bangalore
+
+Y24C007,Wipro,Service,Project Engineer,2024,6.0,1,"CSE,IT,ECE,EEE",4.3,3.4,"Aptitude,Technical,HR",Multiple
+Y24C008,Wipro,Service,TalentNext Engineer,2024,7.0,0,"CSE,IT,ECE",7.5,4.0,"Coding,Technical,HR",Bangalore
+
+Y24C009,Accenture,Service,Associate Software Engineer,2024,6.0,1,"CSE,IT,ECE,EEE",4.2,3.6,"Aptitude,Coding,HR",Multiple
+Y24C010,Accenture,Service,Advanced ASE,2024,7.0,0,"CSE,IT,ECE",6.5,4.2,"Coding,Technical,HR",Bangalore
+
+Y24C011,Cognizant,Service,Programmer Analyst,2024,6.5,1,"CSE,IT,ECE",5.2,3.9,"Coding,Technical,HR",Chennai
+Y24C012,Cognizant,Service,GenC Next,2024,7.2,0,"CSE,IT",7.8,5.0,"Coding,Technical,HR",Bangalore
+
+Y24C013,Capgemini,Service,Analyst,2024,6.0,1,"CSE,IT,ECE,EEE",3.9,3.1,"Aptitude,HR",Multiple
+Y24C014,Capgemini,Service,Senior Analyst,2024,7.0,0,"CSE,IT,ECE",7.0,4.6,"Coding,Technical,HR",Bangalore
+
+Y24C015,IBM,Service,Software Developer,2024,6.5,1,"CSE,IT,ECE",5.8,3.9,"Coding,Technical,HR",Multiple
+Y24C016,IBM,Service,Data Engineer,2024,7.2,0,"CSE,IT",9.0,5.8,"Coding,Technical",Bangalore
+
+Y24C017,HCL,Service,Graduate Engineer,2024,6.0,1,"CSE,IT,ECE",4.0,3.0,"Aptitude,HR",Multiple
+Y24C018,Tech Mahindra,Service,Associate Engineer,2024,6.0,1,"CSE,IT,ECE,EEE",3.8,2.9,"Aptitude,HR",Multiple
+
+Y24C019,Amazon,Product,SDE-1,2024,8.0,0,"CSE,IT",42.0,17.0,"Coding,DSA,System Design,HR",Bangalore
+Y24C020,Amazon,Product,Cloud Support Associate,2024,7.0,0,"CSE,IT,ECE",13.0,7.5,"Technical,HR",Hyderabad
+
+Y24C021,Google,Product,Software Engineer,2024,8.5,0,"CSE,IT",48.0,19.0,"Coding,DSA,System Design,Googliness",Bangalore
+Y24C022,Google,Product,STEP Intern,2024,8.0,0,"CSE,IT",18.0,9.0,"Coding,Technical",Bangalore
+
+Y24C023,Microsoft,Product,Software Engineer,2024,8.0,0,"CSE,IT",40.0,15.5,"Coding,DSA,System Design,HR",Hyderabad
+Y24C024,Microsoft,Product,Support Engineer,2024,7.0,0,"CSE,IT,ECE",11.5,6.8,"Technical,HR",Hyderabad
+
+Y24C025,Adobe,Product,Member Technical Staff,2024,7.5,0,"CSE,IT",28.0,14.0,"Coding,DSA,Technical,HR",Noida
+Y24C026,Intuit,Product,Software Engineer,2024,7.5,0,"CSE,IT",26.0,13.0,"Coding,DSA,System Design",Bangalore
+
+Y24C027,Flipkart,Product,SDE-1,2024,8.0,0,"CSE,IT",30.0,15.0,"Coding,DSA,System Design,HR",Bangalore
+Y24C028,Meesho,Startup,Backend Engineer,2024,7.0,1,"CSE,IT",18.0,10.0,"Coding,Technical",Bangalore
+
+Y24C029,Zomato,Startup,Software Engineer,2024,7.0,1,"CSE,IT,ECE",16.5,9.5,"Coding,Technical,HR",Remote
+Y24C030,Swiggy,Startup,Backend Engineer,2024,7.5,0,"CSE,IT",23.0,11.0,"Coding,DSA,System Design",Bangalore
+
+Y24C031,Zoho,Product,Member Technical Staff,2024,6.5,0,"CSE,IT,ECE",9.5,7.5,"Coding,Technical,HR",Chennai
+Y24C032,Freshworks,Product,Software Engineer,2024,6.5,0,"CSE,IT,ECE",11.0,7.5,"Coding,Technical,HR",Chennai
+
+Y24C033,Oracle,Product,Associate Consultant,2024,7.0,0,"CSE,IT",13.0,8.5,"Technical,HR",Bangalore
+Y24C034,Paytm,Startup,Software Engineer,2024,7.0,1,"CSE,IT",14.0,8.5,"Coding,Technical",Noida
+
+Y24C035,Razorpay,Startup,Backend Engineer,2024,7.5,0,"CSE,IT",20.0,11.0,"Coding,DSA,System Design",Bangalore
+Y24C036,PhonePe,Startup,Software Engineer,2024,7.5,0,"CSE,IT",22.0,12.0,"Coding,DSA,Technical",Bangalore
+
+Y24C037,Byju’s,Startup,Software Engineer,2024,6.5,1,"CSE,IT,ECE",9.0,6.0,"Coding,Technical,HR",Bangalore
+Y24C038,Unacademy,Startup,Backend Engineer,2024,7.0,1,"CSE,IT",15.0,8.8,"Coding,Technical",Bangalore
+
+Y24C039,Deloitte,Service,Analyst,2024,6.5,1,"CSE,IT,ECE",6.5,4.0,"Aptitude,Technical,HR",Multiple
+Y24C040,KPMG,Service,Technology Analyst,2024,6.5,1,"CSE,IT,ECE",6.8,4.2,"Technical,HR",Multiple

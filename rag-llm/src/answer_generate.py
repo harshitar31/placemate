@@ -1,8 +1,7 @@
-import requests
 import json
+from config import OLLAMA_URL, MODEL_NAME
 
-OLLAMA_URL = "http://localhost:11434/api/chat"
-MODEL = "gpt-oss:20b-cloud"
+MODEL = MODEL_NAME
 
 SYSTEM_PROMPT = """
 You are a placement information assistant.
@@ -20,21 +19,34 @@ Rules:
 
 """
 
-def generate_answer(analysis_output, question: str, stream: bool = False):
+import httpx
+
+async def generate_answer(analysis_output, question: str, stream: bool = False, chat_history: list = None):
     """
-    Generate answer from context.
+    Generate answer from context asynchronously.
     
     Args:
         analysis_output: Context to use for answering
         question: User's question
         stream: If True, yields answer chunks as they arrive. If False, returns complete answer.
+        chat_history: Optional list of previous question/answer dictionaries
     
     Returns:
         If stream=False: Complete answer string
-        If stream=True: Generator yielding answer chunks
+        If stream=True: Async generator yielding answer chunks
     """
+    
+    # Build prompt with history
+    history_context = ""
+    if chat_history:
+        history_context = "Previous Conversation:\n"
+        for msg in chat_history:
+            role = "User" if msg["role"] == "user" else "Assistant"
+            history_context += f"{role}: {msg['content']}\n"
+        history_context += "\n"
+
     prompt = f"""
-Context:
+{history_context}Context:
 {analysis_output}
 
 Question:
@@ -56,29 +68,31 @@ Answer the question using ONLY the context above.
     if stream:
         return _generate_streaming(payload)
     else:
-        return _generate_complete(payload)
+        return await _generate_complete(payload)
 
 
-def _generate_complete(payload):
-    """Generate complete answer without streaming."""
-    response = requests.post(OLLAMA_URL, json=payload)
-    response.raise_for_status()
-    return response.json()["message"]["content"].strip()
+async def _generate_complete(payload):
+    """Generate complete answer asynchronously without streaming."""
+    async with httpx.AsyncClient(timeout=60.0) as client:
+        response = await client.post(OLLAMA_URL, json=payload)
+        response.raise_for_status()
+        return response.json()["message"]["content"].strip()
 
 
-def _generate_streaming(payload):
-    """Generate answer with streaming."""
-    response = requests.post(OLLAMA_URL, json=payload, stream=True)
-    response.raise_for_status()
-    
-    for line in response.iter_lines():
-        if line:
-            try:
-                chunk = json.loads(line)
-                if "message" in chunk and "content" in chunk["message"]:
-                    content = chunk["message"]["content"]
-                    if content:
-                        yield content
-            except json.JSONDecodeError:
-                continue
+async def _generate_streaming(payload):
+    """Generate answer asynchronously with streaming."""
+    async with httpx.AsyncClient(timeout=60.0) as client:
+        async with client.stream("POST", OLLAMA_URL, json=payload) as response:
+            response.raise_for_status()
+            
+            async for line in response.aiter_lines():
+                if line:
+                    try:
+                        chunk = json.loads(line)
+                        if "message" in chunk and "content" in chunk["message"]:
+                            content = chunk["message"]["content"]
+                            if content:
+                                yield content
+                    except json.JSONDecodeError:
+                        continue
 

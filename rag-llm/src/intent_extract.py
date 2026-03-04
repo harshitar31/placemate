@@ -1,9 +1,9 @@
-import requests
 import json
 import re
+import httpx
+from config import OLLAMA_URL, INTENT_MODEL_NAME
 
-OLLAMA_URL = "http://localhost:11434/api/chat"
-MODEL = "llama3.2:3b"
+MODEL = INTENT_MODEL_NAME
 
 SYSTEM_PROMPT = """
 You are an intent classifier for a placement information system.
@@ -51,7 +51,7 @@ Return ONLY valid JSON in this exact format:
 
 """
 
-def extract_intent(query: str) -> dict:
+async def extract_intent(query: str) -> dict:
     payload = {
         "model": MODEL,
         "messages": [
@@ -62,8 +62,9 @@ def extract_intent(query: str) -> dict:
         "temperature": 0
     }
 
-    response = requests.post(OLLAMA_URL, json=payload)
-    response.raise_for_status()
+    async with httpx.AsyncClient(timeout=30.0) as client:
+        response = await client.post(OLLAMA_URL, json=payload)
+        response.raise_for_status()
 
     content = response.json()["message"]["content"]
 

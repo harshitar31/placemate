@@ -6,7 +6,7 @@ import time
 import asyncio
 import os
 from filter_extract import extract_filters
-from retrieval import retrieve
+from retrieval import retrieve_async
 from answer_generate import generate_answer
 from reasoning_logic import extract_profile, generate_reasoning
 
@@ -69,7 +69,7 @@ async def stream_rag_response(query: str):
 
     # 2. Retrieval
     retrieval_start = time.time()
-    chunks = retrieve(query=query, filters=filters if filters else None)
+    chunks = await retrieve_async(query=query, filters=filters if filters else None)
     retrieval_time = (time.time() - retrieval_start) * 1000
     
     if not chunks:
@@ -83,7 +83,7 @@ async def stream_rag_response(query: str):
 
     # 3. Answer Generation (Streaming)
     answer_start = time.time()
-    for chunk in generate_answer(context, query, stream=True):
+    async for chunk in await generate_answer(context, query, stream=True):
         yield f"data: {json.dumps({'type': 'content', 'chunk': chunk})}\n\n"
         await asyncio.sleep(0.01) # Small sleep to help yield to event loop
 

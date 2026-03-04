@@ -3,37 +3,19 @@ Fast keyword-based filter extraction to replace LLM-based intent extraction.
 This eliminates the 2-5 second LLM call while maintaining high accuracy.
 """
 
-# Company names extracted from the data
-COMPANIES = [
-    "tcs", "infosys", "wipro", "accenture", "cognizant", "capgemini",
-    "ibm", "hcl", "tech mahindra", "amazon", "google", "microsoft",
-    "adobe", "intuit", "flipkart", "meesho", "zomato", "swiggy",
-    "zoho", "freshworks", "oracle", "paytm", "razorpay", "phonepe",
-    "byju", "byjus", "unacademy", "deloitte", "kpmg"
-]
+import json
+from config import KEYWORDS_FILE
 
-# Keywords for different query types
-POLICY_KEYWORDS = [
-    "policy", "rule", "eligibility", "attendance", "arrear", "arrears",
-    "backlog", "backlogs", "regulation", "requirement", "allowed",
-    "mandatory", "compulsory", "skip", "absence", "register"
-]
+# Load keywords from configuration
+with open(KEYWORDS_FILE, "r") as f:
+    _kw_data = json.load(f)
 
-STATISTICS_KEYWORDS = [
-    "highest", "lowest", "average", "percentage", "statistics",
-    "summary", "total", "count", "how many", "placed", "placement rate"
-]
-
-CGPA_COVERAGE_KEYWORDS = [
-    "enough", "safe", "sufficient", "can i get", "will i get",
-    "chances", "eligible for", "qualify"
-]
-
-COMPANY_INFO_KEYWORDS = [
-    "cutoff", "minimum cgpa", "requirement", "package", "ctc",
-    "salary", "role", "roles", "position", "offer", "interview",
-    "selection", "round", "rounds", "location"
-]
+COMPANY_MAP = _kw_data["COMPANY_MAP"]
+COMPANIES = list(COMPANY_MAP.keys())
+POLICY_KEYWORDS = _kw_data["POLICY_KEYWORDS"]
+STATISTICS_KEYWORDS = _kw_data["STATISTICS_KEYWORDS"]
+CGPA_COVERAGE_KEYWORDS = _kw_data["CGPA_COVERAGE_KEYWORDS"]
+COMPANY_INFO_KEYWORDS = _kw_data["COMPANY_INFO_KEYWORDS"]
 
 
 def extract_filters(query: str) -> dict:
@@ -52,14 +34,12 @@ def extract_filters(query: str) -> dict:
     
     # Extract company name
     company = None
-    for comp in COMPANIES:
-        if comp in query_lower:
-            # Normalize company name
-            company = comp.upper()
-            if company == "TECH MAHINDRA":
-                company = "Tech Mahindra"
-            elif company in ["BYJU", "BYJUS"]:
-                company = "Byju's"
+    
+    # Extracted from keywords.json at the module level
+    
+    for comp_key in COMPANY_MAP:
+        if comp_key in query_lower:
+            company = COMPANY_MAP[comp_key]
             break
     
     # Determine intent based on keywords

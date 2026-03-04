@@ -37,6 +37,8 @@ def get_query_embedding(query: str):
 
 # -------- RETRIEVER FUNCTION --------
 
+import asyncio
+
 def retrieve(
     query: str,
     top_k: int = 7,  # Reduced from 10 to 7 for faster performance
@@ -88,5 +90,10 @@ def retrieve(
             break
 
     return results
+
+
+async def retrieve_async(query: str, top_k: int = 7, filters: dict | None = None):
+    """Async wrapper around CPU-bound FAISS retrieval."""
+    return await asyncio.to_thread(retrieve, query, top_k, filters)
 
 
